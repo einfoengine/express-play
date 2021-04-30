@@ -1,16 +1,10 @@
 const express = require('express');
 const path = require('path');
-
 const users = require('./Users');
+const logger = require('./middleware/logger');
 
+// Initiate app
 const app = express();
-
-
-const logger = (req, res, next) =>{
-    console.log("Hello I am a middleware");
-    console.log("I am running on - " + req.protocol + "://" + req.get('host') + req.originalUrl);
-    next();
-}
 
 // Middleware 
 app.use(logger);
