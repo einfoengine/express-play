@@ -32,12 +32,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 - This is basically a static server
 */
 
-// Get JSON
+// Get JSON users list
 app.get('/api/users', (req, res)=> res.json(users));
 /*
 - Return JSON data as api
 */
 
+// Get single user
+app.get('/api/users/:id', (req, res)=>{
+    const id = parseInt(req.params.id);
+    const user = users.filter((user, key, arr) => user.id === id);
+    if(user.length != 0){
+        res.json(user);
+    }else{
+        // res.json({alert: "not found!"});
+        res.status(400).json({message: "Opps!! Member not found!"});
+    }
+
+});
 
 
 
